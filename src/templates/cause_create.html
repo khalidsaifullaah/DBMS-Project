@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+    <!--================ Home Banner Area =================-->
+    <section class="banner_area">
+        <div class="banner_inner d-flex align-items-center">
+            <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
+            <div class="container">
+                <div class="banner_content text-center">
+                    <h2>Submit A Cause</h2>
+                    <p>Platea nullam nostra laoreet potenti hendrerit laoreet enim nisl</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================ End Home Banner Area =================-->
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="content-section">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <!-- <legend class="border-bottom mb-4">Submit A Cause</legend> -->
+                        {{ form|crispy }}
+                    </fieldset>
+                    <div class="form-group">
+                        <button class="btn btn-outline-info" type="submit">Upload</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+{% endblock %}
+        
+        
+

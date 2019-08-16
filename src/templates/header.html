@@ -1,0 +1,81 @@
+{% load static %}
+<!--================ Start Header Menu Area =================-->
+<header class="header_area">
+    <div class="main_menu">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <a class="navbar-brand logo_h" href="{% url 'index' %}">
+                        <!-- <img src="{% static 'img/logo4.gif' %}" alt="" style="height:36px;width:36px;"><span style="font-weight: bold; font-size: 24px; color: #fdbb00;"> One Step</span> -->
+                        <div class="foo">
+                                <span class="letter" data-letter="O">O</span>
+                              <span class="letter" data-letter="N">N</span>
+                              <span class="letter" data-letter="E">E  </span>
+                                <span class="letter" data-letter="S">S</span>
+                              <span class="letter" data-letter="T">T</span>
+                              <span class="letter" data-letter="E">E</span>
+                              <span class="letter" data-letter="P">P</span>
+                             
+                            </div>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav menu_nav ml-auto">
+                            <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'about-us' %}">About</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'cause-list' %}">Causes</a>
+                            <li class="nav-item submenu dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
+                                    aria-haspopup="true" aria-expanded="false">Pages</a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item"><a class="nav-link" href="{% url 'events' %}">Events</a>
+                                    <li class="nav-item"><a class="nav-link" href="{% url 'event-details' %}">Event
+                                            Details</a>
+                                    <li class="nav-item"><a class="nav-link" href="{% url 'elements' %}">Elements</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item submenu dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
+                                    aria-haspopup="true" aria-expanded="false">Blog</a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item"><a class="nav-link" href="{% url 'blog' %}">Blog</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="{% url 'single-blog' %}">Blog
+                                            Details</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
+                            {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'cause-create' %}">Upload Idea</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'logout' %}">Log out</a>
+                            </li>
+                            {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'register' %}">Register</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'login' %}">Log in</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+<!--================ End Header Menu Area =================-->
