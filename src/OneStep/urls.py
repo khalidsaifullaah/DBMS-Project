@@ -42,7 +42,7 @@ urlpatterns = [
     path('logout/',auth_views.LogoutView.as_view(template_name='logout.html'),name='logout'),
     path('causes/', include("causes.urls")),
     path('events/', include("events.urls")),
-
+    path('posts/', include("blog.urls")),
     
     path('blog/', blog, name='blog'),
     path('about-us/', aboutUs, name='about-us'),

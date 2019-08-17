@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'causes',
     'users',
     'events',
+    'blog',
 ]
 
 MIDDLEWARE = [
