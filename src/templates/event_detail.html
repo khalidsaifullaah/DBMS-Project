@@ -22,46 +22,15 @@
         <div class="row align-items-center justify-content-center">
             <div class="col-lg-6 col-md-8 col-sm-10">
                 <div class="condition-left">
-                    {% if object.thumbnail %}
-                    <img class="img-fluid" src="{{ object.thumbnail.url }}" alt="">
+                    {% if event.thumbnail %}
+                    <img class="img-fluid" src="{{ event.thumbnail.url }}" alt="">
                     {% else %}
                     {% endif %}
                     <div class="row pt-5 mt-5">
                         <div class="col-12">
                             {% if event.author == user %}
-                            <a class="primary_btn" href="{% url 'event-update' event.id %}" style="  display: inline-block;
-									background: #17a2b8;
-									padding: 0px 50px;
-									color: #fff;
-									font-family: sans-serif;
-									font-size: 12px;
-									font-weight: 500;
-									line-height: 48px;
-									border: 1px solid #17a2b8;
-									border-radius: 0px;
-									outline: none !important;
-									box-shadow: none !important;
-									text-align: center;
-									text-transform: uppercase;
-									cursor: pointer;
-									transition: all 300ms linear 0s;">Edit</a>
-                            <a href="{% url 'event-delete' event.id %}" class="btn btn-outline-danger" type="submit"
-                                style="  display: inline-block;
-											background: red;
-											padding: 0px 50px;
-											color: #fff;
-											font-family: sans-serif;
-											font-size: 12px;
-											font-weight: 500;
-											line-height: 48px;
-											border: 1px solid red;
-											border-radius: 0px;
-											outline: none !important;
-											box-shadow: none !important;
-											text-align: center;
-											text-transform: uppercase;
-											cursor: pointer;
-											transition: all 300ms linear 0s;">Delete</a>
+                            <a class="genric-btn info-border circle" href="{% url 'event-update' event.id %}">Edit</a>
+                            <a href="{% url 'event-delete' event.id %}" class="genric-btn danger-border circle" type="submit">Delete</a>
                             {% endif %}
                         </div>
                     </div>
@@ -69,35 +38,36 @@
             </div>
             <div class="offset-lg-1 col-lg-5">
                 <div class="condition-right">
-                    <h2 class="mb-20">{{object.title}}</h2>
-                    <p>{{object.about}}</p>
+                    <h2 class="mb-20">{{event.title}}</h2>
+                    <p>{{event.about}}</p>
                     <ul>
-                        <li>{{ object.date_posted|date:"F d, Y" }}</li>
-                        <li>day: {{ object.eventTime.day }}</li>
-                        <li>{{ object.area }}</li>
+                        <li>{{ event.date_posted|date:"F d, Y" }}</li>
+                        <li>{{ event.area }}</li>
+                        <li>Going: {{ event.joined.count }}</li>
                     </ul>
 
                     <!--================ Start Event Timer =================-->
                     <div class="d-flex count_time" id="clockdiv1">
                         <div class="mr-25">
-                            <h4 id="days"></h4>
+                            <h1 id="days"></h1>
                             <p>Days</p>
                         </div>
                         <div class="mr-25">
-                            <h4 id="hours"></h4>
+                            <h1 id="hours"></h1>
                             <p>Hours</p>
                         </div>
                         <div class="mr-25">
-                            <h4 id="minutes"></h4>
+                            <h1 id="minutes"></h1>
                             <p>Minutes</p>
                         </div>
                         <div>
-                            <h4 id="seconds"></h4>
+                            <h1 id="seconds"></h1>
                             <p>Seconds</p>
                         </div>
-                        <div>
-                            <h4 id="expired"></h4>
-                        </div>
+                        
+                    </div>
+                    <div>
+                        <h1 id="expired"></h1>
                     </div>
                     <script>
                         var cdtd = function (id, end) {
@@ -128,13 +98,27 @@
                                 // If the count down is finished, write some text 
                                 if (distance < 0) {
                                     clearInterval(x);
+                                    document.getElementById("joinBtn").disabled = true;
+                                    document.getElementById("days").innerHTML = 0;
+                                    document.getElementById("hours").innerHTML = 0;
+                                    document.getElementById("minutes").innerHTML = 0;
+                                    document.getElementById("seconds").innerHTML = 0;
                                     document.getElementById("expired").innerHTML = "EXPIRED";
                                 }
                             }, 1000);
                     }
-                    cdtd("expired", new Date({{ object.eventTime.year|safe }}, {{ object.eventTime.month|safe }} -1, {{ object.eventTime.day|safe }}));
+                    cdtd("expired", new Date({{ event.eventTime.year|safe }}, {{ event.eventTime.month|safe }} -1, {{ event.eventTime.day|safe }}));
                     </script>
                     <!--================ End Event Timer =================-->
+                    <form action="{% url 'join_event' %}" method="Post">
+                            {% csrf_token %}
+                            {% if is_joined %}
+                            <button class="genric-btn danger " id="joinBtn" type="submit" name="event_id" value="{{event.id}}">Not Going</button>
+                            
+                            {% else %}
+                            <button class="primary-btn primary_btn joinBtn" id="joinBtn" type="submit" name="event_id" value="{{event.id}}">Join</button>
+                            {% endif %}
+                    </form>
                 </div>
             </div>
         </div>

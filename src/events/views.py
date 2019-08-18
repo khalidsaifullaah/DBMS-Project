@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404,HttpResponseRedirect
 from datetime import date
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
@@ -15,9 +15,38 @@ class EventListView(ListView):
     ordering = ['-date_posted']
 
 
-class EventDetailView(DetailView):
-    model = Event
-    template_name = 'event_detail.html'
+# class EventDetailView(DetailView):
+#     model = Event
+#     template_name = 'event_detail.html'
+
+
+def event_detail(request,pk):
+    event = get_object_or_404(Event, id=pk)
+    is_joined = False
+    if event.joined.filter(id=request.user.id).exists():
+        is_joined = True 
+
+    context = {
+        'event': event,
+        'is_joined': is_joined,
+    }
+    
+    return render(request, 'event_detail.html', context)
+
+@login_required
+def join_event(request):
+    event = get_object_or_404(Event, id=request.POST.get('event_id'))
+    is_joined = False
+    if event.joined.filter(id=request.user.id).exists():
+        event.joined.remove(request.user.id)
+        event.save()
+        is_joined = False 
+    else:
+        event.joined.add(request.user.id)
+        event.save()
+        is_joined = True 
+
+    return HttpResponseRedirect(event.get_absolute_url())
 
 
 @login_required

@@ -21,15 +21,8 @@ from users import views as user_views
 from django.contrib.auth import views as auth_views
 from django.views.i18n import JavaScriptCatalog
 
-from .views import (blog,
-                    index,
-                    aboutUs,
-                    causes,
-                    contact,
-                    elements,
-                    eventDetails,
-                    events,
-                    singleBlog)
+from .views import index,contact
+                    
 
 
 urlpatterns = [
@@ -44,14 +37,8 @@ urlpatterns = [
     path('events/', include("events.urls")),
     path('posts/', include("blog.urls")),
     
-    path('blog/', blog, name='blog'),
-    path('about-us/', aboutUs, name='about-us'),
-    # path('causes/', causes, name='causes'),
+
     path('contact/', contact, name='contact'),
-    path('elements', elements, name='elements'),
-    path('event-details/', eventDetails, name='event-details'),
-    path('events/', events, name='events'),
-    path('single-blog/', singleBlog, name='single-blog'),
 ]
 
 

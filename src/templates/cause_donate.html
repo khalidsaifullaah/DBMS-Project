@@ -6,11 +6,11 @@
 <!--================ Home Banner Area =================-->
 <section class="banner_area">
 	<div class="banner_inner d-flex align-items-center">
-		<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background="">
+		<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background="" style="filter: sepia(100%);background-image: url('{% static "img/Donate.jpg"%}')";>
 		</div>
 		<div class="container">
 			<div class="banner_content text-center">
-				<h2>Cause Details</h2>
+				<h1>Donate</h>
 			</div>
 		</div>
 	</div>
@@ -23,49 +23,9 @@
 		<div class="row align-items-center justify-content-center">
 			<div class="col-lg-6 col-md-8 col-sm-10">
 				<div class="condition-left">
-					{% if object.thumbnail %}
-					<img class="img-fluid" src="{{ object.thumbnail.url }}" alt="">
-					{% else %}
-					{% endif %}
-					<div class="row pt-5 mt-5">
-						<div class="col-12">
-							{% if cause.author == user %}
-							<a class="primary_btn" href="{% url 'cause-update' cause.id %}" style="  display: inline-block;
-									background: #17a2b8;
-									padding: 0px 50px;
-									color: #fff;
-									font-family: sans-serif;
-									font-size: 12px;
-									font-weight: 500;
-									line-height: 48px;
-									border: 1px solid #17a2b8;
-									border-radius: 0px;
-									outline: none !important;
-									box-shadow: none !important;
-									text-align: center;
-									text-transform: uppercase;
-									cursor: pointer;
-									transition: all 300ms linear 0s;">Edit</a>
-							<a href="{% url 'cause-delete' cause.id %}" class="btn btn-outline-danger" type="submit"
-								style="  display: inline-block;
-											background: red;
-											padding: 0px 50px;
-											color: #fff;
-											font-family: sans-serif;
-											font-size: 12px;
-											font-weight: 500;
-											line-height: 48px;
-											border: 1px solid red;
-											border-radius: 0px;
-											outline: none !important;
-											box-shadow: none !important;
-											text-align: center;
-											text-transform: uppercase;
-											cursor: pointer;
-											transition: all 300ms linear 0s;">Delete</a>
-							{% endif %}
-						</div>
-					</div>
+					
+					<img class="img-fluid" src="{% static 'img/donate_side_img.jpg' %}" alt="">
+					
 				</div>
 			</div>
 			<div class="offset-lg-1 col-lg-5">
@@ -73,7 +33,7 @@
                         <form method="POST" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 <fieldset class="form-group">
-                                    <h2 style="color: #fdbb00;" class="text-center">Donation Form</h2>
+                                    <h1 style="color: #fdbb00;" class="text-center">Donation Form</h1>
                                     {{ form|crispy }}
                                 </fieldset>
                                 <div class="form-group text-center">
